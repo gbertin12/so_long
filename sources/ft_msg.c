@@ -6,14 +6,14 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 09:43:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/05/20 09:46:04 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/05/25 12:29:19 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int ft_msg_err(char *msg)
+int	ft_msg_err(char *msg)
 {
-    ft_putstr_fd(msg, 1);
-    return (0);
+	ft_putstr_fd(msg, 1);
+	return (0);
 }

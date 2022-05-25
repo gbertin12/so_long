@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:05:28 by gbertin           #+#    #+#             */
-/*   Updated: 2022/05/23 15:37:08 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/05/23 16:01:54 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 //ne pas utiliser window_put_pixel
 
-void ft_init_struct_map(t_map *map)
+void	ft_init_struct_map(t_map *map)
 {
-    map->exit = 0;
-    map->items = 0;
-    map->start = 0;
-    map->size = 0;
+	map->exit = 0;
+	map->items = 0;
+	map->start = 0;
+	map->size = 0;
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
     t_vars  vars;
     t_map   map;
