@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 09:20:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/05/25 12:28:19 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/05/25 17:48:14 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	ft_fill_struct_map(char *line, t_map *map)
 			return (ft_msg_err("Error\nUnknown item"));
 		i++;
 	}
-	if (map->size == 0)
-		map->size = i;
-	else if (map->size != i)
+	if (map->nb_column == 0)
+		map->nb_column = i;
+	else if (map->nb_column != i)
 		return (ft_msg_err("Error\nMap is not rectangle"));
 	return (1);
 }
@@ -70,7 +70,7 @@ int	ft_is_close(t_map *map, int end)
 	i = 1;
 	while (map->map[i] && i < end)
 	{
-		if (map->map[i][0] != '1' || map->map[i][map->size - 1] != '1')
+		if (map->map[i][0] != '1' || map->map[i][map->nb_column - 1] != '1')
 			return (ft_msg_err("Error\nMap not close"));
 		i++;
 	}
@@ -99,9 +99,7 @@ int	ft_check_map(char *path_map, t_map *map)
 {
 	int		fd;
 	char	*line;
-	int		i;
 
-	i = 0;
 	if (!ft_check_namefile(path_map))
 		return (ft_msg_err("Error\nIt's not a .ber file"));
 	fd = open(path_map, O_RDONLY);
@@ -112,14 +110,14 @@ int	ft_check_map(char *path_map, t_map *map)
 		return (ft_msg_err("Error\nEmpty map"));
 	while (line)
 	{
-		if (!ft_fill_struct_map(line, map))
-			return (0);
-		map->map[i++] = line;
 		line = get_next_line(fd);
+		map->nb_row++;
 	}
-	if (!ft_check_items(map) || !ft_is_close(map, i - 1))
-		return (0);
 	close(fd);
-	map->map[i] = NULL;
+	if(!ft_fill_map(path_map, map, map->nb_row))
+		return (0);
+	if (!ft_check_items(map) || !ft_is_close(map, map->nb_row - 1))
+		return (0);
+	map->map[map->nb_row] = NULL;
 	return (1);
 }
