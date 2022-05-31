@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:23:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/05/25 17:56:23 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/05/30 17:47:58 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,18 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-#  define WIDTH_TILE 64
-#  define HEIGHT_TILE 64
+#  define WIDTH_TILE			64
+#  define HEIGHT_TILE			64
+
+#  define L_ARW					65361
+#  define R_ARW					65363
+#  define UP_ARW				65362
+#  define DOWN_ARW				65364
+#  define A_KEY					97
+#  define W_KEY					119
+#  define S_KEY					115
+#  define D_KEY					100
+#  define ESC					65307
 
 typedef	struct	s_vars {
 	void *mlx;
@@ -34,21 +44,27 @@ typedef struct	s_img {
 	void	*floor;
 	void	*collect;
 	void	*player;
-	void	*column;
-	void	*row;
 	void	*corner;
 }				t_img;
 
+typedef struct	s_player {
+	int	row;
+	int col;
+}				t_player;
+
 typedef struct  s_map {
-    int		nb_column;
-	int		nb_row;
-	int		width;
-	int		height;
-	int		exit;
-	int		items;
-	int		start;
-	char 	**map;
-	t_img	img;
+	int			nb_move;
+    int			nb_column;
+	int			nb_row;
+	int			width;
+	int			height;
+	int			exit;
+	int			items;
+	int			start;
+	char 		**map;
+	t_vars		vars;
+	t_player 	player;
+	t_img		img;
 }				t_map;
 
 //check map
@@ -66,9 +82,24 @@ int	ft_fill_map(char *path_map, t_map *map, int nb_row);
 
 //init struct
 int		ft_check_addr_img(t_map *map);
-int		ft_init_struct_img(t_map *m, t_vars *v);
-int		ft_init_struct_map(t_map *map, t_vars *vars);
+void	ft_init_player(t_map *map);
+int		ft_init_struct_img(t_map *m);
+int		ft_init_struct_map(t_map *map);
 
+//print map
+int	ft_print_tile(char tile, t_map *map, int x, int y);
+int ft_print_map(t_map *map);
 
-int	ft_msg_err(char *msg);
+//hook manager
+int		ft_hook_manager(int keycode, t_map *map);
+void	ft_move_left(t_map *map);
+void	ft_move_down(t_map *map);
+void	ft_move_up(t_map *map);
+void	ft_move_right(t_map *map);
+
+// free
+int		ft_close(t_map *map);
+char	ft_free_img_msg(char *err, t_map *map);
+//msg
+int		ft_msg_err(char *msg);
 #endif

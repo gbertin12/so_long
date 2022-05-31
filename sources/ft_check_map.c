@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 09:20:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/05/25 17:48:14 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/05/31 10:48:20 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,6 @@ int	ft_check_map(char *path_map, t_map *map)
 		return (0);
 	if (!ft_check_items(map) || !ft_is_close(map, map->nb_row - 1))
 		return (0);
-	map->map[map->nb_row] = NULL;
+	
 	return (1);
 }
