@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:23:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/05/30 17:47:58 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/06/02 11:11:19 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int ft_check_map(char *path_map, t_map *map);
 int	ft_calculate_width(t_map *map);
 int	ft_calculate_height(t_map *map);
 int ft_calculate_height_width(t_map *map);
-int	ft_fill_map(char *path_map, t_map *map, int nb_row);
+int	ft_fill_map(char *path_map, t_map *map);
 
 //init struct
 int		ft_check_addr_img(t_map *map);
@@ -100,6 +100,8 @@ void	ft_move_right(t_map *map);
 // free
 int		ft_close(t_map *map);
 char	ft_free_img_msg(char *err, t_map *map);
+
 //msg
 int		ft_msg_err(char *msg);
+void	ft_win(t_map *map);
 #endif

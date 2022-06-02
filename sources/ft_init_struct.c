@@ -6,13 +6,13 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:01:57 by gbertin           #+#    #+#             */
-/*   Updated: 2022/05/31 11:36:28 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/06/02 10:18:51 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int		ft_check_addr_img(t_map *map)
+int	ft_check_addr_img(t_map *map)
 {
 	if (!map->img.door)
 		return (ft_free_img_msg("Error\nBad Sprite exit", map));
@@ -36,9 +36,9 @@ void	ft_init_img(t_map *map)
 	map->img.corner = NULL;
 }
 
-int    ft_init_struct_img(t_map *m)
+int	ft_init_struct_img(t_map *m)
 {
-    int	w;
+	int	w;
 	int	h;
 
 	m->img.door = mlx_xpm_file_to_image(m->vars.mlx, \
@@ -55,6 +55,7 @@ int    ft_init_struct_img(t_map *m)
 		return (0);
 	return (1);
 }
+
 void	ft_init_player(t_map *map)
 {
 	map->player.row = 0;
@@ -71,7 +72,7 @@ int	ft_init_struct_map(t_map *map)
 	map->map = NULL;
 	ft_init_player(map);
 	ft_init_img(map);
-    if(!ft_init_struct_img(map))
-        return(0);
-    return(1);
+	if (!ft_init_struct_img(map))
+		return (0);
+	return (1);
 }

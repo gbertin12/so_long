@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 15:34:08 by gbertin           #+#    #+#             */
-/*   Updated: 2022/05/31 11:48:48 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/06/02 10:38:16 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,23 @@ char	ft_free_img_msg(char *err, t_map *map)
 		mlx_destroy_image(map->vars.mlx, map->img.player);
 	if (map->img.corner != NULL)
 		mlx_destroy_image(map->vars.mlx, map->img.corner);
-	return(ft_msg_err(err));
+	mlx_destroy_display(map->vars.mlx);
+	return (ft_msg_err(err));
 }
 
-int		ft_close(t_map *map)
+int	ft_close(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	mlx_destroy_window(map->vars.mlx, map->vars.win);
 	ft_free_img_msg("", map);
-	while(map->map[i] != NULL)
+	if (map->vars.win)
+		mlx_destroy_window(map->vars.mlx, map->vars.win);
+	while (map->map[i])
+	{
+		free(map->map[i]);
 		i++;
-	i--;
-	while(i != 0)
-		free(map->map[i--]);
+	}
 	free(map->map);
-	exit(0);
+	exit (0);
 }

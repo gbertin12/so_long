@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 09:20:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/05/31 10:48:20 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/05/31 16:30:48 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ int	ft_fill_struct_map(char *line, t_map *map)
 
 int	ft_check_items(t_map *map)
 {
-	int	i;
-
-	i = 0;
 	if (map->items == 0)
 		return (ft_msg_err("Error\nThere is no collectibles"));
 	if (map->exit == 0)
@@ -110,14 +107,14 @@ int	ft_check_map(char *path_map, t_map *map)
 		return (ft_msg_err("Error\nEmpty map"));
 	while (line)
 	{
+		free(line);
 		line = get_next_line(fd);
 		map->nb_row++;
 	}
 	close(fd);
-	if(!ft_fill_map(path_map, map, map->nb_row))
+	if (!ft_fill_map(path_map, map))
 		return (0);
 	if (!ft_check_items(map) || !ft_is_close(map, map->nb_row - 1))
 		return (0);
-	
 	return (1);
 }
