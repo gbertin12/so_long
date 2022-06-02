@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:05:28 by gbertin           #+#    #+#             */
-/*   Updated: 2022/06/02 10:37:28 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/06/02 16:02:36 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,20 @@ int	main(int argc, char **argv)
     ft_memset(&map, 0, sizeof(t_map));
 	map.vars.mlx = mlx_init();
 	if (!map.vars.mlx)
-		return (ft_msg_err("Error\nInit mlx"));
+		ft_msg_err( "Error\nInit mlx");
 	if (!ft_init_struct_map(&map))
-		return (ft_msg_err("Error\nInit struct error"));
+		return (0);
     if (argc == 2 && ft_check_map(argv[1], &map))
     {
 		map.vars.win = mlx_new_window(map.vars.mlx, map.width, map.height, "./so_long");
 		if (!map.vars.win)
-			return (ft_msg_err("Error\nInit window"));
+			ft_msg_err( "Error\nInit window");
 		if(!ft_print_map(&map))
 			printf("\nError print");
 		mlx_key_hook(map.vars.win, ft_hook_manager, &map);
 		mlx_hook(map.vars.win, 17, 0, &ft_close, &map);
 		mlx_loop(map.vars.mlx);
     }
+	else 
+		ft_close(&map);
 }

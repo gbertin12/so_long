@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 11:34:10 by gbertin           #+#    #+#             */
-/*   Updated: 2022/06/02 11:09:46 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/06/02 12:16:37 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	ft_move_left(t_map *map)
 
 	if (map->map[map->player.row][map->player.col - 1] != '1')
 	{
-		if (!(map->map[map->player.row][map->player.col - 1] == 'E'
-			&& map->items != 0))
+		if (map->map[map->player.row][map->player.col - 1] == 'E'
+			&& map->items == 0)
+			ft_win(map);
+		else if (map->map[map->player.row][map->player.col - 1] != 'E')
 		{
 			if (map->map[map->player.row][map->player.col - 1] == 'C')
 				map->items--;
@@ -32,7 +34,7 @@ void	ft_move_left(t_map *map)
 			free(move);
 		}
 	}
-	ft_init_player(map);
+	ft_memset(&(map->player), 0, sizeof(t_player));
 }
 
 void	ft_move_right(t_map *map)
@@ -41,8 +43,10 @@ void	ft_move_right(t_map *map)
 
 	if (map->map[map->player.row][map->player.col + 1] != '1')
 	{
-		if (!(map->map[map->player.row][map->player.col + 1] == 'E'
-			&& map->items != 0))
+		if (map->map[map->player.row][map->player.col + 1] == 'E'
+			&& map->items == 0)
+			ft_win(map);
+		else if (map->map[map->player.row][map->player.col + 1] != 'E')
 		{
 			if (map->map[map->player.row][map->player.col + 1] == 'C')
 				map->items--;
@@ -55,7 +59,7 @@ void	ft_move_right(t_map *map)
 			free(move);
 		}
 	}
-	ft_init_player(map);
+	ft_memset(&(map->player), 0, sizeof(t_player));
 }
 
 void	ft_move_up(t_map *map)
@@ -64,8 +68,10 @@ void	ft_move_up(t_map *map)
 
 	if (map->map[map->player.row - 1][map->player.col] != '1')
 	{
-		if (!(map->map[map->player.row - 1][map->player.col] == 'E'
-			&& map->items != 0))
+		if (map->map[map->player.row - 1][map->player.col] == 'E'
+			&& map->items == 0)
+			ft_win(map);
+		else if (map->map[map->player.row - 1][map->player.col] != 'E')
 		{
 			if (map->map[map->player.row - 1][map->player.col] == 'C')
 				map->items--;
@@ -77,8 +83,9 @@ void	ft_move_up(t_map *map)
 			ft_putstr_fd("\n", 1);
 			free(move);
 		}
+			
 	}
-	ft_init_player(map);
+	ft_memset(&(map->player), 0, sizeof(t_player));
 }
 
 void	ft_move_down(t_map *map)
@@ -87,8 +94,10 @@ void	ft_move_down(t_map *map)
 
 	if (map->map[map->player.row + 1][map->player.col] != '1')
 	{
-		if (!(map->map[map->player.row + 1][map->player.col] == 'E'
-			&& map->items != 0))
+		if (map->map[map->player.row + 1][map->player.col] == 'E'
+			&& map->items == 0)
+			ft_win(map);
+		else if (map->map[map->player.row + 1][map->player.col] != 'E')
 		{
 			if (map->map[map->player.row + 1][map->player.col] == 'C')
 				map->items--;
@@ -100,10 +109,8 @@ void	ft_move_down(t_map *map)
 			ft_putstr_fd("\n", 1);
 			free(move);
 		}
-		else
-			ft_win(map);
 	}
-	ft_init_player(map);
+	ft_memset(&(map->player), 0, sizeof(t_player));
 }
 
 int	ft_hook_manager(int keycode, t_map *map)

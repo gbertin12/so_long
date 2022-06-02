@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 09:20:34 by gbertin           #+#    #+#             */
-/*   Updated: 2022/05/31 16:30:48 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/06/02 17:42:17 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,30 @@ int	ft_fill_struct_map(char *line, t_map *map)
 				map->exit += 1;
 			else if (line[i] == 'C')
 				map->items += 1;
-			else if (line[i] == 'P')
+			else if (line[i] == 'P' && map->start == 0)
 				map->start += 1;
+			else if (line[i] == 'P' && map->start != 0)
+				line[i] = '0';
 		}
 		else
-			return (ft_msg_err("Error\nUnknown item"));
+			return (ft_msg_err( "Error\nUnknown item"));
 		i++;
 	}
 	if (map->nb_column == 0)
 		map->nb_column = i;
 	else if (map->nb_column != i)
-		return (ft_msg_err("Error\nMap is not rectangle"));
+		return (ft_msg_err( "Error\nMap is not rectangle"));
 	return (1);
 }
 
 int	ft_check_items(t_map *map)
 {
 	if (map->items == 0)
-		return (ft_msg_err("Error\nThere is no collectibles"));
+		return(ft_msg_err( "Error\nThere is no collectibles"));
 	if (map->exit == 0)
-		return (ft_msg_err("Error\nThere is no exit"));
+		return(ft_msg_err( "Error\nThere is no exit"));
 	if (map->start == 0)
-		return (ft_msg_err("Error\nThere is no point start"));
+		return(ft_msg_err( "Error\nThere is no player"));
 	return (1);
 }
 
@@ -61,14 +63,14 @@ int	ft_is_close(t_map *map, int end)
 	while (map->map[i][y] && map->map[end][y])
 	{
 		if (map->map[i][y] != '1' || map->map[end][y] != '1')
-			return (ft_msg_err("Error\nMap not close"));
+			return (ft_msg_err( "Error\nMap not close"));
 		y++;
 	}
 	i = 1;
 	while (map->map[i] && i < end)
 	{
 		if (map->map[i][0] != '1' || map->map[i][map->nb_column - 1] != '1')
-			return (ft_msg_err("Error\nMap not close"));
+			return (ft_msg_err( "Error\nMap not close"));
 		i++;
 	}
 	return (1);
@@ -98,13 +100,13 @@ int	ft_check_map(char *path_map, t_map *map)
 	char	*line;
 
 	if (!ft_check_namefile(path_map))
-		return (ft_msg_err("Error\nIt's not a .ber file"));
+		return(ft_msg_err( "Error\nIt's not a .ber file"));
 	fd = open(path_map, O_RDONLY);
 	if (fd < 0)
-		return (ft_msg_err("Error\nOpen map"));
+		return (ft_msg_err( "Error\nOpen map"));
 	line = get_next_line(fd);
 	if (!line)
-		return (ft_msg_err("Error\nEmpty map"));
+		return (ft_msg_err( "Error\nEmpty map"));
 	while (line)
 	{
 		free(line);

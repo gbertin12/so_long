@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:23:11 by gbertin           #+#    #+#             */
-/*   Updated: 2022/06/02 11:11:19 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/06/02 17:46:08 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int	ft_fill_map(char *path_map, t_map *map);
 
 //init struct
 int		ft_check_addr_img(t_map *map);
-void	ft_init_player(t_map *map);
 int		ft_init_struct_img(t_map *m);
 int		ft_init_struct_map(t_map *map);
 
@@ -99,9 +98,11 @@ void	ft_move_right(t_map *map);
 
 // free
 int		ft_close(t_map *map);
-char	ft_free_img_msg(char *err, t_map *map);
+void	ft_finish_gnl(int fd);
+int		ft_free_img_msg(char *err, t_map *map);
 
 //msg
+void	ft_msg_err_exit(t_map *map, char *msg);
 int		ft_msg_err(char *msg);
 void	ft_win(t_map *map);
 #endif

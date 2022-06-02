@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 10:00:49 by gbertin           #+#    #+#             */
-/*   Updated: 2022/05/31 16:37:50 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/06/02 13:02:31 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_print_map(t_map *map)
 		while (map->map[row][col])
 		{
 			if (!ft_print_tile(map->map[row][col], map, x, y))
-				return (ft_msg_err("Error\nPrint tile"));
+				ft_msg_err("Error\nPrint tile");
 			col++;
 			x += WIDTH_TILE;
 		}

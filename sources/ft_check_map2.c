@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:42:03 by gbertin           #+#    #+#             */
-/*   Updated: 2022/05/31 16:40:02 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/06/02 17:47:18 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,30 @@ int	ft_fill_map(char *path_map, t_map *map)
 	i = 0;
 	fd = open(path_map, O_RDONLY);
 	if (fd < 0)
-		return (ft_msg_err("Error\nOpen map 2"));
+		ft_msg_err("Error\nOpen map 2");
 	line = get_next_line(fd);
 	map->map = malloc(sizeof(char *) * (map->nb_row + 1));
 	if (!map->map)
-		return (ft_msg_err("Error\nMalloc error"));
+		ft_msg_err("Error\nMalloc error");
 	while (line)
 	{
 		if (!ft_fill_struct_map(line, map))
-			return (0);
+		{
+			ft_finish_gnl(fd);
+			close(fd);
+			free(line);
+			map->map[i] = NULL;
+			ft_msg_err_exit(map, "");
+		}
 		map->map[i++] = ft_malloc_line(line);
+		if (!map->map[i - 1])
+			return (0);
 		line = get_next_line(fd);
 	}
 	free(line);
 	close(fd);
+	map->map[map->nb_row] = NULL;
 	if (!ft_calculate_height_width(map))
 		return (0);
-	map->map[map->nb_row] = NULL;
 	return (1);
 }
