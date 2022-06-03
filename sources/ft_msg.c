@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 09:43:54 by gbertin           #+#    #+#             */
-/*   Updated: 2022/06/02 12:56:58 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/06/03 09:59:17 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_win(t_map *map)
 	ft_close(map);
 }
 
-int		ft_msg_err(char *msg)
+int	ft_msg_err(char *msg)
 {
 	ft_putstr_fd(msg, 1);
 	return (0);

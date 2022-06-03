@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:42:03 by gbertin           #+#    #+#             */
-/*   Updated: 2022/06/02 17:47:18 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/06/03 11:22:30 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,33 +57,12 @@ char	*ft_malloc_line(char *src)
 int	ft_fill_map(char *path_map, t_map *map)
 {
 	int		fd;
-	char	*line;
-	int		i;
 
-	i = 0;
 	fd = open(path_map, O_RDONLY);
 	if (fd < 0)
 		ft_msg_err("Error\nOpen map 2");
-	line = get_next_line(fd);
-	map->map = malloc(sizeof(char *) * (map->nb_row + 1));
-	if (!map->map)
-		ft_msg_err("Error\nMalloc error");
-	while (line)
-	{
-		if (!ft_fill_struct_map(line, map))
-		{
-			ft_finish_gnl(fd);
-			close(fd);
-			free(line);
-			map->map[i] = NULL;
-			ft_msg_err_exit(map, "");
-		}
-		map->map[i++] = ft_malloc_line(line);
-		if (!map->map[i - 1])
-			return (0);
-		line = get_next_line(fd);
-	}
-	free(line);
+	if (!ft_fill_map2(map, fd))
+		return (0);
 	close(fd);
 	map->map[map->nb_row] = NULL;
 	if (!ft_calculate_height_width(map))

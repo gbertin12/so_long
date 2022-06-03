@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 11:34:10 by gbertin           #+#    #+#             */
-/*   Updated: 2022/06/02 12:16:37 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/06/03 11:15:41 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_move_left(t_map *map)
 			free(move);
 		}
 	}
-	ft_memset(&(map->player), 0, sizeof(t_player));
+	ft_memset(&(map->player), 0, sizeof(t_plyr));
 }
 
 void	ft_move_right(t_map *map)
@@ -59,7 +59,7 @@ void	ft_move_right(t_map *map)
 			free(move);
 		}
 	}
-	ft_memset(&(map->player), 0, sizeof(t_player));
+	ft_memset(&(map->player), 0, sizeof(t_plyr));
 }
 
 void	ft_move_up(t_map *map)
@@ -83,9 +83,8 @@ void	ft_move_up(t_map *map)
 			ft_putstr_fd("\n", 1);
 			free(move);
 		}
-			
 	}
-	ft_memset(&(map->player), 0, sizeof(t_player));
+	ft_memset(&(map->player), 0, sizeof(t_plyr));
 }
 
 void	ft_move_down(t_map *map)
@@ -110,7 +109,7 @@ void	ft_move_down(t_map *map)
 			free(move);
 		}
 	}
-	ft_memset(&(map->player), 0, sizeof(t_player));
+	ft_memset(&(map->player), 0, sizeof(t_plyr));
 }
 
 int	ft_hook_manager(int keycode, t_map *map)

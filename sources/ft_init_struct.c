@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:01:57 by gbertin           #+#    #+#             */
-/*   Updated: 2022/06/02 17:37:24 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/06/03 11:15:50 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_init_struct_img(t_map *m)
 int	ft_init_struct_map(t_map *map)
 {
 	map->vars.win = NULL;
-	ft_memset(&(map->player), 0, sizeof(t_player));
+	ft_memset(&(map->player), 0, sizeof(t_plyr));
 	ft_memset(&(map->img), 0, sizeof(t_img));
 	if (!ft_init_struct_img(map))
 		return (0);

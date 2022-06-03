@@ -6,7 +6,7 @@
 /*   By: gbertin <gbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 15:34:08 by gbertin           #+#    #+#             */
-/*   Updated: 2022/06/02 17:53:17 by gbertin          ###   ########.fr       */
+/*   Updated: 2022/06/03 10:38:45 by gbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_free_img_msg(char *err, t_map *map)
 		mlx_destroy_window(map->vars.mlx, map->vars.win);
 	mlx_destroy_display(map->vars.mlx);
 	free(map->vars.mlx);
-	return(ft_msg_err(err));
+	return (ft_msg_err(err));
 }
 
 void	ft_finish_gnl(int fd)
@@ -41,6 +41,15 @@ void	ft_finish_gnl(int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
+}
+
+void	ft_fill_struct_err(char *line, int fd, t_map *map, int i)
+{
+	ft_finish_gnl(fd);
+	close(fd);
+	free(line);
+	map->map[i] = NULL;
+	ft_msg_err_exit(map, "");
 }
 
 int	ft_close(t_map *map)
